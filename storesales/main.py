@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import Depends, FastAPI
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from api import auth, goods, sale, restock
+from .api import auth, goods, sale, restock
 
 app = FastAPI()
 

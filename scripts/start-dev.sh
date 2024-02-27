@@ -1,3 +1,3 @@
 #!/bin/bash
-uvicorn --app-dir storesales main:app --reload
+uvicorn storesales.main:app --reload
 
