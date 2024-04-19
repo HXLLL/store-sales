@@ -1,12 +1,18 @@
 # db/session.py
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, scoped_session
 from ..core.config import settings
 
-SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+# Example using SQLite
+# For other databases, you will need to adjust the URL
+DATABASE_URL = settings.DATABASE_URL
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}  # Needed only for SQLite
 )
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Use scoped_session to ensure thread safety
+SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
